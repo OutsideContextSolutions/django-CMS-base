@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'treebeard',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for JavaScript and CSS management
+    'djangocms_text_ckeditor',
 
     'easy_thumbnails',
     'filer',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'djangocms_googlemap',
     'djangocms_inherit',
     'djangocms_picture',
-    'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
     'djangocms_snippet',
@@ -56,11 +56,16 @@ INSTALLED_APPS = [
     'reversion',
 ]
 
+CMS_TEMPLATES_DIR = {
+    1: BASE_DIR+"/cmsTemplates/user/",
+}
+
 THUMBNAIL_HIGH_RESOLUTION = True
 
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'cms.middleware.utils.ApphookReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +73,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
 ROOT_URLCONF = 'Settings.urls'
@@ -75,7 +84,7 @@ ROOT_URLCONF = 'Settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+"/cmsTemplates/system/",BASE_DIR+"/cmsTemplates/user/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,6 +92,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
             ],
         },
     },
@@ -122,6 +134,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
+
+LANGUAGES = [
+    ('en', 'English'),
+]
 
 LANGUAGE_CODE = 'en'
 
