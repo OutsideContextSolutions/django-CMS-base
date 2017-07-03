@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reversion'
+    'reversion',
 
     'cms',  # django CMS itself
     'treebeard',  # utilities for implementing a tree
