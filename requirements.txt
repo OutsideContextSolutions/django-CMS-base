@@ -24,6 +24,3 @@ djangocms-grid
 djangocms-oembed
 djangocms-table
 
-django-reversion
-django-filer
-cmsplugin-filer
