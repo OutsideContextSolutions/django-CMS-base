@@ -35,6 +35,6 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS += {{ apps | default(list())}}
+INSTALLED_APPS += {{ apps | default("[ ]")}}
 STATIC_ROOT = '/home/{{user}}/{{domain}}-static/'
 MEDIA_ROOT = '/home/{{user}}/{{domain}}-media/'
