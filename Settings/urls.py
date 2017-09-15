@@ -13,9 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from filebrowser.sites import site
+from django.contrib.auth import views as auth_views
+#from organizations.backends import invitation_backend
 
 urlpatterns = [
+    url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
+
+    url(r'^login/$', auth_views.login,{'template_name': 'registration/login.j2.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+    url('', include('social_django.urls', namespace='social')),
+
+#    url(r'^accounts/', include('organizations.urls')),
+#    url(r'^invitations/', include(invitation_backend().get_urls())),
 ]

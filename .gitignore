@@ -1,3 +1,11 @@
+tmp/
+
+node_modules/
+bower_components/
+test/
+tests/
+
+#Django specific stuff
 secret_key.py
 *.sqlite3
 
