@@ -150,7 +150,7 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.open_id.OpenIdAuth',
+    'outsideContextSolutionsCore.auth.UrlOpenIdConnect',
     'guardian.backends.ObjectPermissionBackend',
 )
 

@@ -1,0 +1,83 @@
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% stylesheet 'core' %}
+</head>
+
+{% block page %}
+<body class="holygrail">
+  {% block header_parent %}
+  <header class="navbar py-4 bg-inverse text-white">
+      {% block header %}
+      <h3>Header</h3>
+      {% endblock %}
+  </header>
+  {% endblock %}
+
+  {% block subheader %}
+  {% endblock %}
+  {% block bodycontent %}
+  <div class="holygrail-body container-flex justify-content-around">
+
+      <!-- Nav -->
+      {% block nav_parent_parent %}
+      <nav class="holygrail-nav col-lg-2 container">
+          {% block nav_parent %}
+          <section>
+              <br>
+              {% block nav %}
+              <h2>pagenav</h2>
+              {{lipsum(n=2)}}
+              {% endblock %}
+          </section>
+          {% endblock %}
+      </nav>
+      {% endblock %}
+
+      <!-- Main -->
+      {% block content_parent_parent %}
+      <main class="holygrail-main col-lg-6 container">
+          {% block content_parent %}
+          <section>
+              <br>
+              {% block content %}
+              <h2>content</h2>
+              {{lipsum(n=12)}}
+              {% endblock %}
+          </section>
+          {% endblock %}
+      </main>
+      {% endblock %}
+
+      <!-- Aside -->
+      {% block aside_parent_parent %}
+      <aside class="holygrail-aside col-lg-2 container">
+          {% block aside_parent %}
+          <section>
+              <br>
+              {% block aside %}
+              <h2>aside</h2>
+              {{lipsum(n=2)}}
+              {% endblock %}
+          </section>
+          {% endblock %}
+      </main>
+      {% endblock %}
+  </div>
+  {% endblock %}
+
+  {% block footer_parent_parent %}
+  <footer class="text-center py-4 bg-inverse text-white">
+      {% block footer_parent %}
+      <div class="container">
+        {% block footer %}
+        {{lipsum(n=1, max=21)}}
+        {% endblock %}
+      </div>
+      {% endblock %}
+  </footer>
+  {% endblock %}
+
+  {% javascript 'core' %}
+</body>
+{% endblock %}
+

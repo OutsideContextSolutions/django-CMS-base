@@ -17,7 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from filebrowser.sites import site
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 #from organizations.backends import invitation_backend
+
+from oidc_provider.views import ProviderInfoView
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
@@ -27,8 +30,11 @@ urlpatterns = [
     url(r'^login/$', auth_views.login,{'template_name': 'registration/login.j2.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+    url(r'^\.well-known/openid-configuration/?$', ProviderInfoView.as_view(), name='provider-info'),
     url('', include('social_django.urls', namespace='social')),
 
 #    url(r'^accounts/', include('organizations.urls')),
 #    url(r'^invitations/', include(invitation_backend().get_urls())),
+
+    url(r'^$', TemplateView.as_view(template_name="home.j2.html")),
 ]
